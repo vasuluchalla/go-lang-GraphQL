@@ -1,0 +1,36 @@
+type JobListing {
+  id: ID!                  # Changed _id to id for consistency
+  title: String!
+  description: String!
+  company: String!         # Changed Company to company for consistency
+  url: String!
+}
+
+type Query {
+  jobs: [JobListing!]!      # Returns a list of all job listings
+  job(id: ID!): JobListing! # Fetch a single job by ID
+}
+
+type Mutation {
+  createJobListing(input: CreateJobListingInput!): JobListing!
+  updateJobListing(id: ID!, input: UpdateJobListingInput!): JobListing!
+  deleteJobListing(id: ID!): DeleteJobResponse!
+}
+
+input CreateJobListingInput {
+  title: String!
+  description: String!
+  company: String!
+  url: String!
+}
+
+input UpdateJobListingInput {
+  title: String           # Optional fields for updating
+  description: String
+  url: String
+  company: String
+}
+
+type DeleteJobResponse {
+  deletedJobId: ID!       # Use ID! for the job ID in the response
+}
